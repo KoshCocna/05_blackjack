@@ -101,22 +101,28 @@ def stand(pS, dS, money, bets):
             money += bets
             print(f"Player Win!: player {pS} --- dealer {dS}")
             print(money, "$")
+            return money
         elif pS == dS:
             print(f"Push: player {pS} --- dealer {dS}")
             print(money, "$")
+            return money
         else:
             money -= bets
             print(f"Dealer Win!: player {pS} --- dealer {dS}")
             print(money, "$")
+            return money
     elif pS < dS:
         money -= bets
         print(f"Dealer Win!: player {pS} --- dealer {dS}")
         print(money,"$")
+        return money
     else:
         print(f"Push: player {pS} --- dealer {dS}")
         print(money, "$")
+        return money
 
 while not endGame:
+
     try:
         bets = int(input("Place your bets, if you want to stop then press '0': "))
         if bets == 0:
@@ -124,7 +130,6 @@ while not endGame:
     except ValueError:
         print('You have input number...')
         continue
-
     pWin, pSum, money = playerDeal(money, bets)
     dWin, dSum, money = dealerDeal(money, bets)
     if pWin or dWin:
@@ -139,7 +144,7 @@ while not endGame:
                 else:
                     continue
             elif option == "stand":
-                stand(pSum, dSum, money, bets)
+                money = stand(pSum, dSum, money, bets)
                 break
             else:
                 continue
